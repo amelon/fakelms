@@ -1,8 +1,6 @@
 # fakelms
 Enable to quickly test simple SCORM modules by emulating some LMS clientside
 
-version 0.0.1 : not usable yet (testing packaging and npmjs hosting)
-
 ## features
 This will emulate an outrageously basic LMS for testing purpose. It poorly reproduces SCORM 2004 LMS API, emulating only what I needed to quickly test my modules without needing to upload a SCORM module on some plateform.
 
@@ -19,16 +17,21 @@ If you find this piece of software useful and need it to be enhanced then feel f
 
 ## usage
 
-```
+```sh
 $ npm i --save fakelms
 ```
 
-```
+```javascript
 var FakeLMS = require('fakelms');
 
 if ( ! FakeLMS.isAvailable()) {
 	console.log("Can't use fake LMS with this browser, sorry");
 }
+
+// you may want the following line before calling attachLMSAPIToWindow()
+// so that functions returning booleans return them as strings, as some LMS APIs do in real life
+FakeLMS.returnBooleanStrings = true;
+
 
 FakeLMS.attachLMSAPIToWindow();
 console.log('Now window.API_1484_11 is defined and will respond to LMS calls');
