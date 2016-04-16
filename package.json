@@ -1,0 +1,26 @@
+{
+  "name": "fakelms",
+  "version": "0.0.1",
+  "description": "Enable to quickly test a simple SCORM module by emulating some LMS functionnalities clientside",
+  "main": "lib/fakelms.js",
+  "directories": {},
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "grunt": "^0.4.5",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-mrdoc": "^0.1.9",
+    "mocha": "^2.4.5",
+    "unit.js": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fluxine/fakelms.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fluxine/fakelms/issues"
+  },
+  "homepage": "https://github.com/fluxine/fakelms.git#readme"
+}
