@@ -1,7 +1,8 @@
 {
   "name": "fakelms",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Enable to quickly test a simple SCORM module by emulating some LMS functionnalities clientside",
+  "keywords": ["LMS","SCORM","emulation"],
   "main": "lib/fakelms.js",
   "directories": {},
   "dependencies": {},

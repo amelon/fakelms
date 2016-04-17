@@ -17,6 +17,8 @@ If you find this piece of software useful and need it to be enhanced then feel f
 
 ### supported data model
 - cmi.exit
+- cmi.completion\_status
+- cmi.success\_status
 - cmi.interactions.**
 
 ## usage
@@ -39,6 +41,7 @@ FakeLMS.returnBooleanStrings = true;
 
 FakeLMS.attachLMSAPIToWindow();
 console.log('Now window.API_1484_11 is defined and will respond to LMS calls');
+// you then can discover it like real LMS (see http://scorm.com/scorm-explained/technical-scorm/run-time/api-discovery-algorithms/)
 
 FakeLMS.clearData(); // if you need to remove all stored data, a fresh restart
 
