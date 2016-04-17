@@ -1,6 +1,6 @@
 {
   "name": "fakelms",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Enable to quickly test a simple SCORM module by emulating some LMS functionnalities clientside",
   "keywords": ["LMS","SCORM","emulation"],
   "main": "lib/fakelms.js",

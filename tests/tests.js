@@ -99,6 +99,13 @@ describe('FakeLMS', function() {
 			});
 		});
 	});
+	describe('GetErrorString', function() {
+		it('GetErrorString(FakeLMS.ERRCODES.ALREADY_INITIALIZED) returns "Already Initialized"', function() {
+			init();
+			errstr = LMSAPI.GetErrorString(FakeLMS.ERRCODES.ALREADY_INITIALIZED);
+			test.string(errstr).isEqualTo("Already Initialized");
+		});
+	});
 	describe('Setting/Getting values', function() {
 		describe('cmi.exit', function() {
 			it('setting cmi.exit with expected value', function() {
