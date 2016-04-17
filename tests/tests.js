@@ -171,7 +171,64 @@ describe('FakeLMS', function() {
 			});
 		});
 		describe('cmi.interactions', function() {
-			// TODO
-		})
+			it('getting cmi.interactions._children returns an non-empty array of strings', function() {
+				init();
+				FakeLMS.clearData();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.GetValue('cmi.interactions._children');
+				test.array(result);
+				test.number(result.length).isGreaterThan(0);
+				result.forEach(test.string);
+			});
+			it('setting cmi.interactions._children fails with DATA_MODEL_ELEMENT_IS_READ_ONLY', function() {
+				init();
+				FakeLMS.clearData();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.SetValue('cmi.interactions._children','whatever');
+				test.bool(result).isFalse();
+				errcode = LMSAPI.GetLastError();
+				test.number(errcode).isEqualTo(FakeLMS.ERRCODES.DATA_MODEL_ELEMENT_IS_READ_ONLY);
+			});
+			it('getting cmi.interactions._count prior to any set returns 0', function() {
+				init();
+				FakeLMS.clearData();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.GetValue('cmi.interactions._count');
+				test.number(result).isEqualTo(0);
+			});
+			it('setting cmi.interactions.0.id to anything returns true', function() {
+				init();
+				FakeLMS.clearData();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.SetValue('cmi.interactions.0.id','whatever');
+				test.bool(result).isTrue();
+			});
+			it('setting cmi.interactions.0.type to a legal value returns true, further get() returns the value', function() {
+				init();
+				FakeLMS.clearData();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.SetValue('cmi.interactions.0.type','choice');
+				test.bool(result).isTrue();
+				result = LMSAPI.GetValue('cmi.interactions.0.type');
+				test.string(result).isEqualTo('choice');
+			});
+			it('setting cmi.interactions.0.type to an illegal value returns false', function() {
+				init();
+				FakeLMS.clearData();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.SetValue('cmi.interactions.0.type','whatever');
+				test.bool(result).isFalse();
+			});
+			it('getting cmi.interactions.2.id when cmi.interactions.count == 1 returns false with error code DATA_MODEL_ELEMENT_VALUE_NOT_INITIALIZED', function() {
+				init();
+				FakeLMS.clearData();
+				LMSAPI.Initialize("");
+				LMSAPI.SetValue('cmi.interactions.0.id','whatever');
+				var result = LMSAPI.GetValue('cmi.interactions.2.id');
+				test.bool(result).isFalse();
+				errcode = LMSAPI.GetLastError();
+				test.number(errcode).isEqualTo(FakeLMS.ERRCODES.DATA_MODEL_ELEMENT_VALUE_NOT_INITIALIZED);
+			});
+		});
 	});
 });
