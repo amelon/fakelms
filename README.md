@@ -13,7 +13,11 @@ Altough it will give less than a complete LMS API it will not give more because 
 It will attach an object responding to LMS API calls to the window.API_1484_11 property.
 
 
-If you find this piece of software useful and need it to be enhanced then feel free to propose pushes.
+If you find this piece of software useful and need it to be enhanced then feel free to propose pulls.
+
+### supported data model
+- cmi.exit
+- cmi.interactions.**
 
 ## usage
 
@@ -41,5 +45,5 @@ FakeLMS.clearData(); // if you need to remove all stored data, a fresh restart
 ```
 
 
-### clientside storage
-LMS data is stored in local storage between sessions.
+## implentation details
+LMS data is stored in local storage between sessions. If the browser do not support it then FakeLMS.isAvailable returns false;

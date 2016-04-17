@@ -99,65 +99,79 @@ describe('FakeLMS', function() {
 			});
 		});
 	});
-	describe('Setting values', function() {
-		describe('Standard case', function() {
-			//TODO
+	describe('Setting/Getting values', function() {
+		describe('cmi.exit', function() {
+			it('setting cmi.exit with expected value', function() {
+				init();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.SetValue('cmi.exit','suspend');
+				test.bool(result).isTrue();
+			});
+			it('setting cmi.exit with unexpected value fails with DATA_MODEL_ELEMENT_VALUE_OUT_OF_RANGE', function() {
+				init();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.SetValue('cmi.exit','whatever');
+				test.bool(result).isFalse();
+				errcode = LMSAPI.GetLastError();
+				test.number(errcode).isEqualTo(FakeLMS.ERRCODES.DATA_MODEL_ELEMENT_VALUE_OUT_OF_RANGE);
+			});
+			it('getting cmi.exit fails with DATA_MODEL_ELEMENT_IS_WRITE_ONLY', function() {
+				init();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.GetValue('cmi.exit');
+				test.bool(result).isFalse();
+				errcode = LMSAPI.GetLastError();
+				test.number(errcode).isEqualTo(FakeLMS.ERRCODES.DATA_MODEL_ELEMENT_IS_WRITE_ONLY);
+			});
 		});
+		describe('cmi.completion_status', function() {
+			it('setting cmi.completion_status with expected value', function() {
+				init();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.SetValue('cmi.completion_status','completed');
+				test.bool(result).isTrue();
+			});
+			it('setting cmi.completion_status with unexpected value fails with DATA_MODEL_ELEMENT_VALUE_OUT_OF_RANGE', function() {
+				init();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.SetValue('cmi.completion_status','whatever');
+				test.bool(result).isFalse();
+				errcode = LMSAPI.GetLastError();
+				test.number(errcode).isEqualTo(FakeLMS.ERRCODES.DATA_MODEL_ELEMENT_VALUE_OUT_OF_RANGE);
+			});
+			it('getting cmi.completion_status returns what was set before', function() {
+				init();
+				LMSAPI.Initialize("");
+				LMSAPI.SetValue('cmi.completion_status','completed');
+				var result = LMSAPI.GetValue('cmi.completion_status');
+				test.string(result).isEqualTo('completed');
+			});
+		});
+		describe('cmi.success_status', function() {
+			it('setting cmi.success_status with expected value', function() {
+				init();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.SetValue('cmi.success_status','passed');
+				test.bool(result).isTrue();
+			});
+			it('setting cmi.success_status with unexpected value fails with DATA_MODEL_ELEMENT_VALUE_OUT_OF_RANGE', function() {
+				init();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.SetValue('cmi.success_status','whatever');
+				test.bool(result).isFalse();
+				errcode = LMSAPI.GetLastError();
+				test.number(errcode).isEqualTo(FakeLMS.ERRCODES.DATA_MODEL_ELEMENT_VALUE_OUT_OF_RANGE);
+			});
+			it('getting cmi.success_status returns what was set before', function() {
+				init();
+				LMSAPI.Initialize("");
+				LMSAPI.SetValue('cmi.success_status','passed');
+				var result = LMSAPI.GetValue('cmi.success_status');
+				test.string(result).isEqualTo('passed');
+			});
+		});
+		describe('cmi.interactions', function() {
+			// TODO
+		})
 	});
-/*
-  var MainClass = require('my-module/lib/main');
-  it('load', function() {
-    var myModule  = require('my-module');
-    test
-      .function(myModule)
-        .hasName('MyModule')
-      .object(myModule())
-        .isInstanceOf(MainClass)
-    ;
-  });
-  describe('Main class', function() {
-    it('emit() - emit an event', function() {
-      var spy  = test.spy();
-      var main = new MainClass();
-      var listener = function(value) {
-        spy();
-        // test the value emitted
-        test.string(value)
-          .isIdenticalTo('value of any event');
-      };
-      test
-        .given('add listener', function() {
-          main.on('any.event', listener);
-        })
-        .when('emit an event', function() {
-          main.emit('any.event', 'value of any event');
-        })
-        .then(function() {
-          test
-            .function(main.listeners('any.event'))
-            .bool(spy.calledOnce)
-              .isTrue()
-          ;
-        })
-    });
-    it('connection', function(done) {
-      // asynchronous test
-      main.get('http://localhost/api/show/item', function(err, json, headers) {
-        var now = new Date();
-        if(err) {
-          test.fail(err.message);
-        }
-        test
-          .value(headers)
-            .hasHeaderJson()
-          .object(json)
-            .hasKey('title', 'item title')
-            .hasKey('description')
-          .date(json.updatedAt)
-            .isBefore(now)
-        ;
-        done();
-      });
-    });
-  });*/
 });
