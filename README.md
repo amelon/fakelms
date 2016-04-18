@@ -19,12 +19,16 @@ If you find this piece of software useful and need it to be enhanced then feel f
 - cmi.exit
 - cmi.completion\_status
 - cmi.success\_status
-- cmi.interactions.**
-
+- cmi.interactions.\_count
+- cmi.interactions.\_children (holds `['id','type','learner_response']`)
+- cmi.interactions.<n>.id
+- cmi.interactions.<n>.type
+- cmi.interactions.<n>.learner\_response
+	
 ## usage
 
 ```sh
-$ npm i --save fakelms
+$ npm install --save-dev fakelms
 ```
 
 ```javascript

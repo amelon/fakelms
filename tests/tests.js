@@ -178,7 +178,7 @@ describe('FakeLMS', function() {
 			});
 		});
 		describe('cmi.interactions', function() {
-			it('getting cmi.interactions._children returns an non-empty array of strings', function() {
+			it('getting cmi.interactions._children returns a non-empty array of strings', function() {
 				init();
 				FakeLMS.clearData();
 				LMSAPI.Initialize("");
@@ -235,6 +235,23 @@ describe('FakeLMS', function() {
 				test.bool(result).isFalse();
 				errcode = LMSAPI.GetLastError();
 				test.number(errcode).isEqualTo(FakeLMS.ERRCODES.DATA_MODEL_ELEMENT_VALUE_NOT_INITIALIZED);
+			});
+		});
+	});
+	describe('FakeLMS.clearData()', function() {
+		it('FakeLMS.clearData() remove all window.localstorage keys owned by FakeLMS', function() {
+			init();
+			FakeLMS.clearData();
+			LMSAPI.Initialize("");
+			LMSAPI.SetValue('cmi.exit','suspend');
+			LMSAPI.SetValue('cmi.success_status','passed');
+			LMSAPI.SetValue('cmi.completion_status','completed');
+			LMSAPI.SetValue('cmi.interactions.0.id','whatever');
+			LMSAPI.SetValue('cmi.interactions.0.type','choice');
+			LMSAPI.SetValue('cmi.interactions.0.learner_response','1');
+			FakeLMS.clearData();
+			['exit','success_status','completion_status','interactions'].forEach(function(key) {
+				test.value(window.localStorage.getItem(key)).isNull();
 			});
 		});
 	});
