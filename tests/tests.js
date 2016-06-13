@@ -177,6 +177,80 @@ describe('FakeLMS', function() {
 				test.string(result).isEqualTo('passed');
 			});
 		});
+		describe('cmi.session_time and cmi.total_time', function() {
+			it('setting cmi.session_time to unsupported value fails with DATA_MODEL_ELEMENT_VALUE_OUT_OF_RANGE', function() {
+				init();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.SetValue('cmi.session_time','123');
+				test.bool(result).isFalse();
+				errcode = LMSAPI.GetLastError();
+				test.number(errcode).isEqualTo(FakeLMS.ERRCODES.DATA_MODEL_ELEMENT_VALUE_OUT_OF_RANGE);
+			});
+			it('setting cmi.session_time with supported value (say "PT10S") returns true', function() {
+				init();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.SetValue('cmi.session_time','PT10S');
+				test.bool(result).isTrue();
+			});
+			it('getting cmi.session_time fails with DATA_MODEL_ELEMENT_IS_WRITE_ONLY', function() {
+				init();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.GetValue('cmi.session_time');
+				test.bool(result).isFalse();
+				errcode = LMSAPI.GetLastError();
+				test.number(errcode).isEqualTo(FakeLMS.ERRCODES.DATA_MODEL_ELEMENT_IS_WRITE_ONLY);
+			});
+			it('setting cmi.total_time fails with DATA_MODEL_ELEMENT_IS_READ_ONLY', function() {
+				init();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.SetValue('cmi.total_time','whatever');
+				test.bool(result).isFalse();
+				errcode = LMSAPI.GetLastError();
+				test.number(errcode).isEqualTo(FakeLMS.ERRCODES.DATA_MODEL_ELEMENT_IS_READ_ONLY);
+			});
+			it('getting cmi.total_time on freshly initialized LMS Data return "PT0S"', function() {
+				init();
+				FakeLMS.clearData();
+				LMSAPI.Initialize("");
+				var result = LMSAPI.GetValue('cmi.total_time');
+				test.string(result).isEqualTo('PT0S');
+			});
+			it('setting cmi.session_time does not affect cmi.total_time until Terminate() is called', function() {
+				init();
+				FakeLMS.clearData();
+				LMSAPI.Initialize("");
+				LMSAPI.SetValue('cmi.session_time','PT10S');
+				var result = LMSAPI.GetValue('cmi.total_time');
+				test.string(result).isEqualTo('PT0S');
+			});
+			it('last value set for cmi.session_time is added to cmi.total_time when Terminate() is called', function() {
+				init();
+				FakeLMS.clearData();
+				LMSAPI.Initialize("");
+				LMSAPI.SetValue('cmi.session_time','PT10S');
+				LMSAPI.SetValue('cmi.session_time','PT100S');
+				LMSAPI.Terminate("");
+				LMSAPI.Initialize("");
+				var result = LMSAPI.GetValue('cmi.total_time');
+				test.string(result).isEqualTo('PT100S');
+			});
+			it('value of cmi.total_time persiste across session and session_time values are added', function() {
+				init();
+				FakeLMS.clearData();
+				LMSAPI.Initialize("");
+				LMSAPI.SetValue('cmi.session_time','PT1S');
+				LMSAPI.Terminate("");
+				LMSAPI.Initialize("");
+				LMSAPI.SetValue('cmi.session_time','PT2S');
+				LMSAPI.Terminate("");
+				LMSAPI.Initialize("");
+				LMSAPI.SetValue('cmi.session_time','PT3S');
+				LMSAPI.Terminate("");
+				LMSAPI.Initialize("");
+				var result = LMSAPI.GetValue('cmi.total_time');
+				test.string(result).isEqualTo('PT6S');
+			});
+		});
 		describe('cmi.interactions', function() {
 			it('getting cmi.interactions._children returns a non-empty array of strings', function() {
 				init();

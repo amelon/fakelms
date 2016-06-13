@@ -19,11 +19,13 @@ If you find this piece of software useful and need it to be enhanced then feel f
 - cmi.exit
 - cmi.completion\_status
 - cmi.success\_status
+- cmi.session\_time (only "PT<n>S" format is supported for now)
+- cmi.total\_time (only "PT<n>S" string will be returned for now)
 - cmi.interactions.\_count
 - cmi.interactions.\_children (holds `['id','type','learner_response']`)
-- cmi.interactions.<n>.id
-- cmi.interactions.<n>.type
-- cmi.interactions.<n>.learner\_response
+- cmi.interactions.\<n\>.id
+- cmi.interactions.\<n\>.type
+- cmi.interactions.\<n\>.learner\_response
 	
 ## usage
 
