@@ -1,6 +1,6 @@
 {
   "name": "fakelms",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Enable to quickly test a simple SCORM module by emulating some LMS functionnalities clientside",
   "keywords": [
     "LMS",
