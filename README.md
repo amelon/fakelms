@@ -10,7 +10,7 @@ It will try to behave as much as possible like a real LMS, respecting design odd
 Altough it will give less than a complete LMS API it will not give more because the client code should not rely on specific functionnalities that would be exposed here.
 
 
-It will attach an object responding to LMS API calls to the window.API_1484_11 property.
+It will attach an object responding to LMS API calls to the window.API\_1484\_11 property.
 
 
 If you find this piece of software useful and need it to be enhanced then feel free to propose pulls.
@@ -19,8 +19,8 @@ If you find this piece of software useful and need it to be enhanced then feel f
 - cmi.exit
 - cmi.completion\_status
 - cmi.success\_status
-- cmi.session\_time (only "PT<n>S" format is supported for now)
-- cmi.total\_time (only "PT<n>S" string will be returned for now)
+- cmi.session\_time (only "PT\<n\>S" format is supported for now)
+- cmi.total\_time (only "PT\<n\>S" string will be returned for now)
 - cmi.interactions.\_count
 - cmi.interactions.\_children (holds `['id','type','learner_response']`)
 - cmi.interactions.\<n\>.id
@@ -46,7 +46,7 @@ FakeLMS.returnBooleanStrings = true;
 
 
 FakeLMS.attachLMSAPIToWindow();
-console.log('Now window.API_1484_11 is defined and will respond to LMS calls');
+console.log('Now window.API\_1484\_11 is defined and will respond to LMS calls');
 // you then can discover it like real LMS (see http://scorm.com/scorm-explained/technical-scorm/run-time/api-discovery-algorithms/)
 
 FakeLMS.clearData(); // if you need to remove all stored data, a fresh restart
