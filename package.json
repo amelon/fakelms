@@ -1,16 +1,31 @@
 {
   "name": "@amelon/fakelms",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "Enable to quickly test a simple SCORM module by emulating some LMS functionnalities clientside",
   "keywords": [
     "LMS",
     "SCORM",
     "emulation"
   ],
-  "main": "lib/fakelms.js",
+  "sideEffects": false,
+  "scripts": {
+    "build:dev": "cross-env NODE_ENV=development webpack",
+    "build:prod": "cross-env NODE_ENV=production webpack",
+    "prepublish": "npm run build:prod"
+  },
+  "main": "index.js",
   "directories": {},
   "dependencies": {},
   "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.2",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.6.0",
+    "webpack": "^4.19.1",
+    "webpack-command": "^0.4.1"
   },
   "repository": {
     "type": "git",

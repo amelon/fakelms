@@ -1,0 +1,19 @@
+{
+  // config https://github.com/Microsoft/vscode/issues/31188
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "checkJs": true,
+    // "target": "es2017",
+    // This must be specified if "paths" is set
+    "baseUrl": "./",
+    // Relative to "baseUrl"
+    "paths": {
+      // does not work
+      // "bdm-scorm-sdk/*": ["planned_packages/bdm-scorm-sdk/*"],
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+  ]
+}
