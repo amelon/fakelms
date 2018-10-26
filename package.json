@@ -17,14 +17,14 @@
   "directories": {},
   "dependencies": {},
   "devDependencies": {
-    "@babel/cli": "^7.1.0",
-    "@babel/core": "^7.1.0",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
     "babel-eslint": "^10.0.1",
-    "babel-loader": "^8.0.2",
+    "babel-loader": "^8.0.4",
     "cross-env": "^5.2.0",
-    "eslint": "^5.6.0",
-    "webpack": "^4.19.1",
+    "eslint": "^5.7.0",
+    "webpack": "^4.23.1",
     "webpack-command": "^0.4.1"
   },
   "repository": {
