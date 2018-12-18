@@ -26,7 +26,7 @@ If you find this piece of software useful and need it to be enhanced then feel f
 - cmi.interactions.\<n\>.id
 - cmi.interactions.\<n\>.type
 - cmi.interactions.\<n\>.learner\_response
-	
+
 ## usage
 
 ```sh
@@ -45,7 +45,7 @@ if ( ! FakeLMS.isAvailable()) {
 FakeLMS.returnBooleanStrings = true;
 
 
-FakeLMS.attachLMSAPIToWindow();
+FakeLMS.attachLMSAPIToWindow('myStorageKey'); // in case of multiple module to dev - you could use module name as storagekey
 console.log('Now window.API\_1484\_11 is defined and will respond to LMS calls');
 // you then can discover it like real LMS (see http://scorm.com/scorm-explained/technical-scorm/run-time/api-discovery-algorithms/)
 
